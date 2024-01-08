@@ -9,12 +9,6 @@ const App = () => {
     dispatch(toggleVote(id));
   };
 
-  const addAnecdote = (event) => {
-    event.preventDefault();
-    const anecdote = event.target.anacdote.value;
-    event.target.anacdote.value = "";
-    dispatch(createAnecdote(anecdote));
-  };
   const sortedAnecdotes = anecdotes.sort((a, b) => b.votes - a.votes);
 
   return (
@@ -29,6 +23,24 @@ const App = () => {
           </div>
         </div>
       ))}
+      <AnecdoteForm />
+    </div>
+  );
+};
+
+export default App;
+
+const AnecdoteForm = () => {
+  const dispatch = useDispatch();
+
+  const addAnecdote = (event) => {
+    event.preventDefault();
+    const anecdote = event.target.anacdote.value;
+    event.target.anacdote.value = "";
+    dispatch(createAnecdote(anecdote));
+  };
+  return (
+    <>
       <h2>create new</h2>
       <form onSubmit={addAnecdote}>
         <div>
@@ -36,8 +48,6 @@ const App = () => {
         </div>
         <button>create</button>
       </form>
-    </div>
+    </>
   );
 };
-
-export default App;
